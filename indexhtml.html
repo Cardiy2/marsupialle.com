@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunday Littles — Premium Baby & Kids Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#FAF7F2;
+  --warm:#F2EBE0;
+  --sand:#E8D9C4;
+  --clay:#C4956A;
+  --forest:#2D4A3E;
+  --navy:#1C2B3A;
+  --slate:#4A5568;
+  --muted:#8A9099;
+  --white:#FFFFFF;
+  --black:#111111;
+  --sage:#7A9E8E;
+  --blush:#F0D5CA;
+  --gold:#B8925A;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--black);overflow-x:hidden}
+
+/* ===== ANNOUNCEMENT ===== */
+.ann{background:var(--forest);color:white;text-align:center;padding:10px 20px;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:400}
+.ann span{color:var(--sand)}
+
+/* ===== NAV ===== */
+nav{position:sticky;top:0;z-index:200;background:rgba(250,247,242,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--sand);padding:0 48px}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px;max-width:1400px;margin:0 auto}
+.nav-left{display:flex;gap:36px;align-items:center}
+.nav-left a,.nav-right a{text-decoration:none;color:var(--navy);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;transition:color .2s;position:relative}
+.nav-left a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--clay);transition:width .3s}
+.nav-left a:hover::after{width:100%}
+.nav-left a:hover{color:var(--clay)}
+.logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--navy);letter-spacing:2px;text-decoration:none}
+.logo em{font-style:italic;color:var(--clay)}
+.nav-right{display:flex;gap:24px;align-items:center}
+.nav-right a{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500}
+.nav-right a:hover{color:var(--clay)}
+.cart-btn{background:var(--navy);color:white!important;padding:10px 22px;letter-spacing:1.5px;font-size:11px;text-transform:uppercase;font-weight:500;border:none;cursor:pointer;transition:background .2s}
+.cart-btn:hover{background:var(--clay)!important}
+.nav-icon{font-size:17px;cursor:pointer;color:var(--navy);transition:color .2s}
+.nav-icon:hover{color:var(--clay)}
+
+/* ===== HERO ===== */
+.hero{height:92vh;min-height:600px;position:relative;overflow:hidden;display:flex;align-items:center}
+.hero-slides{position:absolute;inset:0;display:flex;transition:transform .9s cubic-bezier(.77,0,.175,1)}
+.hsl{min-width:100%;height:100%;position:relative;display:flex;align-items:center}
+.hsl-bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.hsl-ov{position:absolute;inset:0}
+.hsl-content{position:relative;z-index:2;padding:0 80px;max-width:680px}
+.hsl-tag{font-size:10px;letter-spacing:5px;text-transform:uppercase;margin-bottom:16px;font-weight:500}
+.hsl-title{font-family:'Cormorant Garamond',serif;font-size:72px;line-height:1.0;margin-bottom:20px;font-weight:300}
+.hsl-title em{font-style:italic}
+.hsl-desc{font-size:15px;line-height:1.8;margin-bottom:36px;font-weight:300;max-width:440px}
+.hsl-actions{display:flex;gap:16px;align-items:center}
+.btn-primary{background:var(--forest);color:white;padding:15px 36px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;border:none;cursor:pointer;font-family:'Jost',sans-serif;transition:all .2s}
+.btn-primary:hover{background:var(--clay)}
+.btn-ghost{background:none;color:inherit;padding:15px 36px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;border:1.5px solid currentColor;cursor:pointer;font-family:'Jost',sans-serif;transition:all .2s}
+.btn-ghost:hover{background:currentColor;color:white}
+.hero-nav{position:absolute;bottom:40px;left:80px;display:flex;gap:10px;z-index:10}
+.hdot{width:30px;height:2px;background:rgba(255,255,255,.35);border:none;cursor:pointer;transition:all .3s;padding:0}
+.hdot.on{background:white;width:56px}
+.hero-arr{position:absolute;right:48px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:10}
+.harr{width:44px;height:44px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:white;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;backdrop-filter:blur(4px)}
+.harr:hover{background:var(--clay);border-color:var(--clay)}
+
+/* ===== MARQUEE ===== */
+.marquee{background:var(--clay);padding:14px 0;overflow:hidden;white-space:nowrap}
+.marquee-track{display:inline-flex;animation:mq 30s linear infinite}
+.marquee-track span{padding:0 40px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:white;font-weight:400}
+.marquee-track .dot{padding:0;color:rgba(255,255,255,.5)}
+@keyframes mq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ===== TRUST STRIP ===== */
+.trust{background:var(--forest);display:grid;grid-template-columns:repeat(4,1fr);padding:48px 64px;gap:20px;max-width:100%}
+.titem{text-align:center;color:white;padding:0 20px}
+.ticon{font-size:26px;margin-bottom:12px}
+.ttitle{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--sand);margin-bottom:6px;font-weight:400;letter-spacing:.5px}
+.tdesc{font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;font-weight:300}
+
+/* ===== SECTIONS ===== */
+.section{padding:88px 64px}
+.section.alt{background:var(--warm)}
+.section.dark{background:var(--navy)}
+.sh{text-align:center;margin-bottom:60px}
+.slabel{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--clay);margin-bottom:10px;font-weight:500}
+.stitle{font-family:'Cormorant Garamond',serif;font-size:48px;color:var(--navy);line-height:1.1;margin-bottom:14px;font-weight:300}
+.stitle.white{color:var(--cream)}
+.ssub{color:var(--slate);font-size:15px;max-width:520px;margin:0 auto;line-height:1.7;font-weight:300}
+.ssub.white{color:rgba(255,255,255,.65)}
+
+/* ===== CATEGORY GRID ===== */
+.cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;max-width:1300px;margin:0 auto}
+.cat-card{position:relative;aspect-ratio:.85;overflow:hidden;cursor:pointer;background:var(--sand)}
+.cat-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.cat-card:hover img{transform:scale(1.05)}
+.cat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,43,58,.7) 0%,transparent 50%);transition:opacity .3s}
+.cat-card:hover .cat-overlay{opacity:.9}
+.cat-label{position:absolute;bottom:0;left:0;right:0;padding:20px 16px;color:white}
+.cat-emoji{font-size:24px;margin-bottom:6px;display:block}
+.cat-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;letter-spacing:.5px;margin-bottom:2px}
+.cat-count{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.65)}
+
+/* ===== COLLECTION TABS ===== */
+.coll-tabs{display:flex;gap:0;justify-content:center;margin-bottom:52px;border-bottom:1px solid var(--sand)}
+.ctab{padding:14px 32px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;background:none;border:none;cursor:pointer;color:var(--muted);font-family:'Jost',sans-serif;position:relative;transition:color .2s}
+.ctab::after{content:'';position:absolute;bottom:-1px;left:0;width:0;height:2px;background:var(--clay);transition:width .3s}
+.ctab.on{color:var(--navy)}
+.ctab.on::after{width:100%}
+.ctab:hover{color:var(--clay)}
+
+/* ===== PRODUCT GRID ===== */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2px;max-width:1400px;margin:0 auto}
+.pcard{background:var(--white);position:relative;cursor:pointer;overflow:hidden}
+.pcard:hover .pimg img{transform:scale(1.04)}
+.pcard:hover .padd-btn{opacity:1;transform:translateY(0)}
+.pimg{height:320px;overflow:hidden;position:relative;background:var(--warm);display:flex;align-items:center;justify-content:center}
+.pimg img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.pimg .pfall{font-size:72px;opacity:.3}
+.pbadge{position:absolute;top:14px;left:14px;z-index:2}
+.pbadge span{display:inline-block;padding:4px 12px;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:600;background:var(--forest);color:white}
+.pbadge span.sale{background:var(--clay)}
+.pbadge span.new{background:var(--navy)}
+.pwish{position:absolute;top:14px;right:14px;width:32px;height:32px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;box-shadow:0 2px 8px rgba(0,0,0,.1);border:none;font-size:14px;transition:all .2s}
+.pwish:hover{background:var(--blush)}
+.padd-btn{position:absolute;bottom:0;left:0;right:0;background:var(--forest);color:white;padding:14px;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:500;border:none;cursor:pointer;font-family:'Jost',sans-serif;opacity:0;transform:translateY(100%);transition:all .3s;z-index:3}
+.padd-btn:hover{background:var(--clay)}
+.pbody{padding:18px 20px 22px}
+.pbrand{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--clay);margin-bottom:4px;font-weight:500}
+.pname{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--navy);margin-bottom:8px;line-height:1.3;font-weight:400}
+.prow{display:flex;justify-content:space-between;align-items:center}
+.pprice{font-size:14px;font-weight:500;color:var(--navy)}
+.pprice.sale{color:var(--clay)}
+.pold{font-size:12px;color:var(--muted);text-decoration:line-through;margin-right:6px}
+.plink{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--clay);text-decoration:none;transition:color .2s}
+.plink:hover{color:var(--forest)}
+.panel{display:none}.panel.on{display:block}
+
+/* ===== PROMO BANNER ===== */
+.promo-grid{display:grid;grid-template-columns:1fr 1fr;min-height:480px}
+.promo-side{padding:72px 64px;display:flex;flex-direction:column;justify-content:center}
+.promo-side.dk{background:var(--navy);color:white}
+.promo-side.lt{background:var(--blush);color:var(--navy)}
+.promo-side.sage{background:var(--sage);color:white}
+.promo-side.cream{background:var(--cream);color:var(--navy)}
+.promo-tag{font-size:10px;letter-spacing:4px;text-transform:uppercase;font-weight:500;margin-bottom:16px;opacity:.7}
+.promo-title{font-family:'Cormorant Garamond',serif;font-size:44px;line-height:1.1;margin-bottom:16px;font-weight:300}
+.promo-title em{font-style:italic}
+.promo-text{font-size:14px;line-height:1.8;margin-bottom:32px;opacity:.8;font-weight:300;max-width:360px}
+.btn-outline-w{background:none;color:white;padding:13px 30px;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:500;border:1.5px solid white;cursor:pointer;font-family:'Jost',sans-serif;transition:all .2s}
+.btn-outline-w:hover{background:white;color:var(--navy)}
+.btn-outline-d{background:none;color:var(--navy);padding:13px 30px;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:500;border:1.5px solid var(--navy);cursor:pointer;font-family:'Jost',sans-serif;transition:all .2s}
+.btn-outline-d:hover{background:var(--navy);color:white}
+
+/* ===== BESTSELLERS ===== */
+.bs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1200px;margin:0 auto}
+.bs-card{position:relative;overflow:hidden;background:var(--white);cursor:pointer}
+.bs-card:hover .bs-img img{transform:scale(1.05)}
+.bs-num{position:absolute;top:16px;left:16px;font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:rgba(255,255,255,.25);line-height:1;z-index:2}
+.bs-img{height:380px;overflow:hidden;background:var(--warm);display:flex;align-items:center;justify-content:center}
+.bs-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.bs-img .bfall{font-size:80px;opacity:.25}
+.bs-body{padding:20px 24px 26px;border-top:2px solid var(--sand)}
+.bs-brand{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--clay);margin-bottom:5px}
+.bs-name{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--navy);margin-bottom:6px;font-weight:400}
+.bs-row{display:flex;justify-content:space-between;align-items:center}
+.bs-price{font-size:15px;font-weight:500;color:var(--navy)}
+.bs-cta{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--clay);text-decoration:none;border-bottom:1px solid var(--clay);padding-bottom:2px;transition:color .2s}
+.bs-cta:hover{color:var(--forest)}
+
+/* ===== TESTIMONIALS ===== */
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1200px;margin:0 auto}
+.tcard{background:var(--white);padding:36px 32px;border-left:3px solid var(--clay)}
+.tstars{font-size:13px;color:var(--clay);letter-spacing:2px;margin-bottom:16px}
+.tquote{font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.7;color:var(--navy);font-style:italic;margin-bottom:18px;font-weight:300}
+.tauthor{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.tauthor strong{color:var(--clay);font-weight:500}
+
+/* ===== NEWSLETTER ===== */
+.newsletter{background:var(--forest);padding:88px 64px;text-align:center}
+.newsletter h2{font-family:'Cormorant Garamond',serif;font-size:52px;color:var(--cream);font-weight:300;margin-bottom:14px}
+.newsletter h2 em{font-style:italic;color:var(--sand)}
+.newsletter p{color:rgba(255,255,255,.6);font-size:14px;font-weight:300;margin-bottom:36px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.7}
+.nl-form{display:flex;max-width:480px;margin:0 auto;gap:0}
+.nl-form input{flex:1;padding:16px 22px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:white;font-size:13px;font-family:'Jost',sans-serif;outline:none}
+.nl-form input::placeholder{color:rgba(255,255,255,.35)}
+.nl-form input:focus{border-color:var(--sand)}
+.nl-form button{background:var(--clay);color:white;padding:16px 28px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;border:none;cursor:pointer;font-family:'Jost',sans-serif;white-space:nowrap;transition:background .2s}
+.nl-form button:hover{background:var(--gold)}
+.nl-note{font-size:11px;color:rgba(255,255,255,.35);margin-top:14px;letter-spacing:.5px}
+
+/* ===== INSTAGRAM ===== */
+.ig-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;max-width:100%}
+.ig-cell{aspect-ratio:1;overflow:hidden;position:relative;background:var(--sand);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:40px;color:rgba(0,0,0,.15)}
+.ig-cell img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.ig-cell:hover img{transform:scale(1.08)}
+.ig-ov{position:absolute;inset:0;background:rgba(45,74,62,.55);opacity:0;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;letter-spacing:3px;text-transform:uppercase;transition:opacity .3s}
+.ig-cell:hover .ig-ov{opacity:1}
+
+/* ===== FOOTER ===== */
+footer{background:#0E1B28;color:rgba(255,255,255,.6);padding:72px 64px 36px}
+.fgrid{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr 1fr;gap:48px;margin-bottom:56px}
+.fbrand .logo{color:var(--sand)}
+.fbrand p{font-size:13px;line-height:1.8;margin:16px 0 24px;max-width:280px;font-weight:300}
+.flinks{display:flex;gap:14px;margin-top:6px}
+.flinks a{width:34px;height:34px;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:13px;text-decoration:none;transition:all .2s}
+.flinks a:hover{border-color:var(--clay);color:var(--clay)}
+.fcol h4{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--sand);margin-bottom:20px;font-weight:500}
+.fcol ul{list-style:none}
+.fcol li{margin-bottom:10px;font-size:13px;cursor:pointer;font-weight:300;transition:color .2s}
+.fcol li:hover{color:white}
+.fbot{border-top:1px solid rgba(255,255,255,.08);padding-top:28px;display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:300}
+.pay-icons{display:flex;gap:8px}
+.pay-icon{background:rgba(255,255,255,.08);border-radius:3px;padding:4px 8px;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,.5)}
+.nl-row{display:flex;gap:8px}
+.nl-row input{padding:9px 14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:white;font-size:12px;font-family:'Jost',sans-serif;width:200px}
+.nl-row input::placeholder{color:rgba(255,255,255,.3)}
+.nl-row button{background:var(--clay);border:none;color:white;padding:9px 16px;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif}
+
+/* ===== MOBILE ===== */
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .nav-left{display:none}
+  .hsl-content{padding:0 32px;max-width:100%}
+  .hsl-title{font-size:44px}
+  .trust{grid-template-columns:repeat(2,1fr);padding:40px 24px}
+  .section{padding:56px 24px}
+  .cat-grid{grid-template-columns:repeat(3,1fr)}
+  .pgrid{grid-template-columns:repeat(2,1fr)}
+  .promo-grid{grid-template-columns:1fr}
+  .bs-grid{grid-template-columns:1fr}
+  .test-grid{grid-template-columns:1fr}
+  .ig-grid{grid-template-columns:repeat(3,1fr)}
+  .fgrid{grid-template-columns:1fr 1fr}
+  .nl-form{flex-direction:column}
+  footer{padding:48px 24px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="ann">✦ Free Shipping on CAD Orders Over $80 &nbsp;|&nbsp; <span>OEKO-TEX® Certified Bamboo</span> &nbsp;|&nbsp; 90-Day Quality Guarantee ✦</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="#">Sleep</a>
+      <a href="#">Clothing</a>
+      <a href="#">Nursery</a>
+      <a href="#">Gifts</a>
+      <a href="#">Home</a>
+    </div>
+    <a href="#" class="logo">Sunday <em>Littles</em></a>
+    <div class="nav-right">
+      <a href="#">About</a>
+      <span class="nav-icon">🔍</span>
+      <span class="nav-icon">♡</span>
+      <button class="cart-btn">Cart (0)</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-slides" id="hslides">
+
+    <!-- Slide 1 — Sunday Littles Bamboo -->
+    <div class="hsl">
+      <div class="hsl-bg" style="background:linear-gradient(135deg,#2D4A3E 0%,#1C3028 100%)"></div>
+      <div class="hsl-ov" style="background:linear-gradient(to right,rgba(0,0,0,.4) 0%,transparent 70%)"></div>
+      <div class="hsl-content" style="color:white">
+        <div class="hsl-tag" style="color:var(--sand)">New Arrivals 2025</div>
+        <div class="hsl-title">Buttery Soft<br><em>Bamboo Sleep</em></div>
+        <div class="hsl-desc">OEKO-TEX® certified, thermoregulating bamboo pajamas and sleep sacks — designed for babies who deserve the best nights of their little lives.</div>
+        <div class="hsl-actions">
+          <button class="btn-primary">Shop Sleep Collection</button>
+          <button class="btn-ghost" style="color:white;border-color:rgba(255,255,255,.5)">Learn Our Story</button>
+        </div>
+      </div>
+      <div style="position:absolute;right:120px;top:50%;transform:translateY(-50%);width:380px;height:480px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:120px;border-radius:4px">🌙</div>
+    </div>
+
+    <!-- Slide 2 — Personalized Gifts -->
+    <div class="hsl">
+      <div class="hsl-bg" style="background:linear-gradient(135deg,#F2EBE0 0%,#E8D9C4 100%)"></div>
+      <div class="hsl-ov" style="background:linear-gradient(to right,rgba(28,43,58,.55) 0%,transparent 60%)"></div>
+      <div class="hsl-content" style="color:white">
+        <div class="hsl-tag" style="color:var(--sand)">The Custom Co · Personalized</div>
+        <div class="hsl-title">Gifts They'll<br><em>Cherish Forever</em></div>
+        <div class="hsl-desc">Personalized blankets, backpacks, nappy bags and keepsakes — crafted with their name and made with love.</div>
+        <div class="hsl-actions">
+          <button class="btn-primary">Shop Personalized Gifts</button>
+        </div>
+      </div>
+      <div style="position:absolute;right:120px;top:50%;transform:translateY(-50%);width:380px;height:480px;background:rgba(196,149,106,.15);display:flex;align-items:center;justify-content:center;font-size:120px;border-radius:4px">🎀</div>
+    </div>
+
+    <!-- Slide 3 — Nursery Collection -->
+    <div class="hsl">
+      <div class="hsl-bg" style="background:linear-gradient(135deg,#1C2B3A 0%,#2D4A3E 100%)"></div>
+      <div class="hsl-ov" style="background:linear-gradient(to right,rgba(0,0,0,.45) 0%,transparent 65%)"></div>
+      <div class="hsl-content" style="color:white">
+        <div class="hsl-tag" style="color:var(--sand)">High Cotton Textile · Nursery</div>
+        <div class="hsl-title">The Nursery<br><em>of Your Dreams</em></div>
+        <div class="hsl-desc">Ruffled crib skirts, large crib bows, bedding sets and luxury curtains — every detail, perfectly considered.</div>
+        <div class="hsl-actions">
+          <button class="btn-primary">Shop Nursery</button>
+          <button class="btn-ghost" style="color:white;border-color:rgba(255,255,255,.5)">View Lookbook</button>
+        </div>
+      </div>
+      <div style="position:absolute;right:120px;top:50%;transform:translateY(-50%);width:380px;height:480px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-size:120px;border-radius:4px">🏡</div>
+    </div>
+
+    <!-- Slide 4 — Premium Throws -->
+    <div class="hsl">
+      <div class="hsl-bg" style="background:linear-gradient(135deg,#C4956A 0%,#8B5A30 100%)"></div>
+      <div class="hsl-ov" style="background:linear-gradient(to right,rgba(0,0,0,.4) 0%,transparent 65%)"></div>
+      <div class="hsl-content" style="color:white">
+        <div class="hsl-tag" style="color:rgba(255,255,255,.7)">Battilo Home · Cozy Essentials</div>
+        <div class="hsl-title">Throws That<br><em>Hug Back</em></div>
+        <div class="hsl-desc">Chenille, cable-knit and wavy fringe throw blankets — luxury comfort for every corner of your home.</div>
+        <div class="hsl-actions">
+          <button class="btn-primary">Shop Home Throws</button>
+        </div>
+      </div>
+      <div style="position:absolute;right:120px;top:50%;transform:translateY(-50%);width:380px;height:480px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:120px;border-radius:4px">🧶</div>
+    </div>
+
+    <!-- Slide 5 — Baby Clothing -->
+    <div class="hsl">
+      <div class="hsl-bg" style="background:linear-gradient(135deg,#F0D5CA 0%,#E8C4B0 100%)"></div>
+      <div class="hsl-ov" style="background:linear-gradient(to right,rgba(28,43,58,.5) 0%,transparent 60%)"></div>
+      <div class="hsl-content" style="color:white">
+        <div class="hsl-tag" style="color:rgba(255,255,255,.8)">Posh Tots · Obi Outfitters</div>
+        <div class="hsl-title">Dressed for<br><em>Every Moment</em></div>
+        <div class="hsl-desc">From heirloom gowns and ruffled bonnets to bamboo sets and athletic wear — clothing as precious as they are.</div>
+        <div class="hsl-actions">
+          <button class="btn-primary">Shop Baby Clothing</button>
+          <button class="btn-ghost" style="color:white;border-color:rgba(255,255,255,.5)">Shop by Size</button>
+        </div>
+      </div>
+      <div style="position:absolute;right:120px;top:50%;transform:translateY(-50%);width:380px;height:480px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:120px;border-radius:4px">👶</div>
+    </div>
+  </div>
+
+  <div class="hero-nav" id="hdots"></div>
+  <div class="hero-arr">
+    <button class="harr" onclick="hs(-1)">▲</button>
+    <button class="harr" onclick="hs(1)">▼</button>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Bamboo Sleepwear</span><span class="dot">✦</span>
+    <span>OEKO-TEX® Certified</span><span class="dot">✦</span>
+    <span>Personalized Gifts</span><span class="dot">✦</span>
+    <span>Nursery Essentials</span><span class="dot">✦</span>
+    <span>Heirloom Quality</span><span class="dot">✦</span>
+    <span>Premium Baby Clothing</span><span class="dot">✦</span>
+    <span>Luxury Throws</span><span class="dot">✦</span>
+    <span>Free Shipping CAD $80+</span><span class="dot">✦</span>
+    <span>Bamboo Sleepwear</span><span class="dot">✦</span>
+    <span>OEKO-TEX® Certified</span><span class="dot">✦</span>
+    <span>Personalized Gifts</span><span class="dot">✦</span>
+    <span>Nursery Essentials</span><span class="dot">✦</span>
+    <span>Heirloom Quality</span><span class="dot">✦</span>
+    <span>Premium Baby Clothing</span><span class="dot">✦</span>
+    <span>Luxury Throws</span><span class="dot">✦</span>
+    <span>Free Shipping CAD $80+</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- TRUST -->
+<div class="trust">
+  <div class="titem"><div class="ticon">🌿</div><div class="ttitle">OEKO-TEX® Certified</div><div class="tdesc">Free from harmful substances, safe for the most delicate skin</div></div>
+  <div class="titem"><div class="ticon">🚚</div><div class="ttitle">Free Shipping</div><div class="tdesc">CAD orders over $80 · US over $125 · International over $200</div></div>
+  <div class="titem"><div class="ticon">✨</div><div class="ttitle">90-Day Guarantee</div><div class="tdesc">Triple-stitched, pre-washed, built to last through years of love</div></div>
+  <div class="titem"><div class="ticon">💚</div><div class="ttitle">1 PJ = 1 Meal</div><div class="tdesc">Every pajama purchase feeds a child in need — 1,124+ meals given</div></div>
+</div>
+
+<!-- SHOP BY CATEGORY -->
+<section class="section alt">
+  <div class="sh">
+    <div class="slabel">Explore</div>
+    <div class="stitle">Shop by Category</div>
+    <div class="ssub">From bamboo sleepwear to personalized keepsakes — every collection curated for your little one's most special moments</div>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card" style="background:#2D4A3E">
+      <div class="cat-overlay"></div>
+      <div class="cat-label"><span class="cat-emoji">🌙</span><div class="cat-name">Sleep &amp; PJs</div><div class="cat-count">Sunday Littles</div></div>
+    </div>
+    <div class="cat-card" style="background:#C4956A">
+      <div class="cat-overlay"></div>
+      <div class="cat-label"><span class="cat-emoji">🏡</span><div class="cat-name">Nursery</div><div class="cat-count">High Cotton Textile</div></div>
+    </div>
+    <div class="cat-card" style="background:#1C2B3A">
+      <div class="cat-overlay"></div>
+      <div class="cat-label"><span class="cat-emoji">👶</span><div class="cat-name">Baby Clothing</div><div class="cat-count">Posh Tots · Obi</div></div>
+    </div>
+    <div class="cat-card" style="background:#7A9E8E">
+      <div class="cat-overlay"></div>
+      <div class="cat-label"><span class="cat-emoji">🎁</span><div class="cat-name">Personalized Gifts</div><div class="cat-count">The Custom Co</div></div>
+    </div>
+    <div class="cat-card" style="background:#8B5A30">
+      <div class="cat-overlay"></div>
+      <div class="cat-label"><span class="cat-emoji">🧶</span><div class="cat-name">Home Throws</div><div class="cat-count">Battilo Home</div></div>
+    </div>
+    <div class="cat-card" style="background:#4A5568">
+      <div class="cat-overlay"></div>
+      <div class="cat-label"><span class="cat-emoji">🐾</span><div class="cat-name">Baby &amp; Puppy</div><div class="cat-count">Obi Outfitters</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS BY COLLECTION -->
+<section class="section">
+  <div class="sh">
+    <div class="slabel">All Collections</div>
+    <div class="stitle">Shop All Products</div>
+    <div class="ssub">Browse every product across all our curated partner collections — all in one beautiful store</div>
+  </div>
+
+  <div class="coll-tabs">
+    <button class="ctab on" onclick="sw('all',this)">All Products</button>
+    <button class="ctab" onclick="sw('sleep',this)">Sleep &amp; PJs</button>
+    <button class="ctab" onclick="sw('nursery',this)">Nursery</button>
+    <button class="ctab" onclick="sw('clothing',this)">Baby Clothing</button>
+    <button class="ctab" onclick="sw('gifts',this)">Personalized Gifts</button>
+    <button class="ctab" onclick="sw('home',this)">Home Throws</button>
+  </div>
+
+  <!-- ALL -->
+  <div id="c-all" class="panel on">
+    <div class="pgrid" id="grid-all"></div>
+  </div>
+  <div id="c-sleep" class="panel"><div class="pgrid" id="grid-sleep"></div></div>
+  <div id="c-nursery" class="panel"><div class="pgrid" id="grid-nursery"></div></div>
+  <div id="c-clothing" class="panel"><div class="pgrid" id="grid-clothing"></div></div>
+  <div id="c-gifts" class="panel"><div class="pgrid" id="grid-gifts"></div></div>
+  <div id="c-home" class="panel"><div class="pgrid" id="grid-home"></div></div>
+</section>
+
+<!-- PROMO BANNERS -->
+<div class="promo-grid">
+  <div class="promo-side dk">
+    <div class="promo-tag">Sunday Littles · Bamboo Collection</div>
+    <div class="promo-title">Sleep Better.<br><em>Live Softer.</em></div>
+    <div class="promo-text">Our CloudLuxe™ bamboo pajamas fit up to 3x longer than standard baby PJs. Soft, breathable and built for growth — because bedtime should feel like a dream.</div>
+    <button class="btn-outline-w">Discover Sleep Collection</button>
+  </div>
+  <div class="promo-side lt">
+    <div class="promo-tag" style="color:var(--clay)">The Custom Co · Australia</div>
+    <div class="promo-title">Make It<br><em>Theirs.</em></div>
+    <div class="promo-text">Personalised blankets, backpacks, pyjamas and keepsakes with their name on it. The ultimate newborn gift — crafted with love, shipped worldwide.</div>
+    <button class="btn-outline-d">Shop Personalized</button>
+  </div>
+</div>
+<div class="promo-grid">
+  <div class="promo-side cream">
+    <div class="promo-tag" style="color:var(--clay)">High Cotton Textile</div>
+    <div class="promo-title">A Nursery<br><em>Worth Dreaming Of</em></div>
+    <div class="promo-text">Ruffled crib skirts, large crib bows, mesh liners, bedding sets and nursery curtains — luxury details that transform any nursery into something truly beautiful.</div>
+    <button class="btn-outline-d">Explore Nursery</button>
+  </div>
+  <div class="promo-side sage">
+    <div class="promo-tag" style="color:rgba(255,255,255,.75)">Battilo Home</div>
+    <div class="promo-title">Wrap Every<br><em>Corner in Comfort</em></div>
+    <div class="promo-text">Chenille, cable-knit and wavy fringe throw blankets — for the whole family. Premium quality home throws that feel as beautiful as they look.</div>
+    <button class="btn-outline-w">Shop Home Throws</button>
+  </div>
+</div>
+
+<!-- BESTSELLERS -->
+<section class="section alt">
+  <div class="sh">
+    <div class="slabel">Most Loved</div>
+    <div class="stitle">Our Bestsellers</div>
+    <div class="ssub">The pieces parents keep coming back for — tried, tested and adored by thousands of families</div>
+  </div>
+  <div class="bs-grid" id="bs-grid"></div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="sh">
+    <div class="slabel">Real Reviews</div>
+    <div class="stitle">What Parents Are Saying</div>
+  </div>
+  <div class="test-grid">
+    <div class="tcard"><div class="tstars">★★★★★</div><div class="tquote">"The bamboo sleep sack is the softest thing I have ever felt on a baby. My son sleeps 3 hours longer since we switched. Worth every single penny."</div><div class="tauthor"><strong>Sarah M.</strong> · Vancouver, BC</div></div>
+    <div class="tcard"><div class="tstars">★★★★★</div><div class="tquote">"I ordered the personalized blanket from The Custom Co and it arrived beautifully packaged. My friend cried when she opened it. Perfect newborn gift."</div><div class="tauthor"><strong>Emma R.</strong> · Sydney, AU</div></div>
+    <div class="tcard"><div class="tstars">★★★★★</div><div class="tquote">"The ruffled crib skirt from High Cotton Textile transformed our nursery completely. It looks like something from a luxury magazine. Absolutely gorgeous."</div><div class="tauthor"><strong>Joanna K.</strong> · London, UK</div></div>
+    <div class="tcard"><div class="tstars">★★★★★</div><div class="tquote">"My daughter's first words when I put the Obi waffle knit set on her were 'cozy mama.' She hasn't wanted to take it off since. The quality is extraordinary."</div><div class="tauthor"><strong>Priya N.</strong> · Toronto, CA</div></div>
+    <div class="tcard"><div class="tstars">★★★★★</div><div class="tquote">"The Battilo chenille throw is so beautiful. It's become the centrepiece of our living room and everyone asks where I got it. Fast shipping too!"</div><div class="tauthor"><strong>Claire D.</strong> · Melbourne, AU</div></div>
+    <div class="tcard"><div class="tstars">★★★★★</div><div class="tquote">"Family matching PJs from Sunday Littles are the most-loved gift I've ever given. The bamboo fabric is so soft and the sizing fits so much longer than expected."</div><div class="tauthor"><strong>Jessica T.</strong> · Calgary, CA</div></div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="section alt" style="padding-bottom:0;padding-left:0;padding-right:0">
+  <div class="sh" style="padding:0 64px 40px">
+    <div class="slabel">@sundaylittles</div>
+    <div class="stitle">Follow Our World</div>
+    <div class="ssub">Real families, real moments — tag us in yours</div>
+  </div>
+  <div class="ig-grid">
+    <div class="ig-cell">🌙<div class="ig-ov">View Post</div></div>
+    <div class="ig-cell">👶<div class="ig-ov">View Post</div></div>
+    <div class="ig-cell">🎀<div class="ig-ov">View Post</div></div>
+    <div class="ig-cell">🧶<div class="ig-ov">View Post</div></div>
+    <div class="ig-cell">🏡<div class="ig-ov">View Post</div></div>
+    <div class="ig-cell">✨<div class="ig-ov">View Post</div></div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <h2>Join the <em>Sunday Club</em></h2>
+  <p>Early access to new arrivals, exclusive offers and gentle parenting inspiration — delivered to your inbox with love.</p>
+  <div class="nl-form">
+    <input type="email" placeholder="your@email.com">
+    <button>Subscribe</button>
+  </div>
+  <p class="nl-note">No spam, ever. Unsubscribe at any time. 🌿</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fgrid">
+    <div class="fcol fbrand">
+      <a href="#" class="logo">Sunday <em style="color:var(--clay)">Littles</em></a>
+      <p>Where comfort meets craftsmanship — premium bamboo sleepwear, personalized gifts, nursery essentials and luxury home throws for families who believe the little moments matter most.</p>
+      <div class="flinks">
+        <a href="#">f</a><a href="#">ig</a><a href="#">p</a><a href="#">yt</a>
+      </div>
+    </div>
+    <div class="fcol">
+      <h4>Shop</h4>
+      <ul>
+        <li>Sleep &amp; PJs</li><li>Baby Clothing</li><li>Nursery</li><li>Home Throws</li><li>Personalized Gifts</li><li>Baby &amp; Puppy</li><li>Gift Cards</li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Collections</h4>
+      <ul>
+        <li>Sunday Littles</li><li>The Custom Co</li><li>High Cotton Textile</li><li>Battilo Home</li><li>Posh Tots</li><li>Obi Outfitters</li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Shop by Size</h4>
+      <ul>
+        <li>0–3 Months</li><li>3–6 Months</li><li>6–12 Months</li><li>12–18 Months</li><li>18–24 Months</li><li>2T–3T</li><li>Family Matching</li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Help</h4>
+      <ul>
+        <li>About Us</li><li>FAQ</li><li>Shipping</li><li>Returns</li><li>Contact</li><li>Track Order</li><li>Gift Registry</li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>© 2025 Sunday Littles. All rights reserved.</span>
+    <div class="pay-icons">
+      <span class="pay-icon">VISA</span>
+      <span class="pay-icon">MC</span>
+      <span class="pay-icon">AMEX</span>
+      <span class="pay-icon">PayPal</span>
+      <span class="pay-icon">Shop Pay</span>
+      <span class="pay-icon">AfterPay</span>
+    </div>
+    <span>Privacy &nbsp;·&nbsp; Terms &nbsp;·&nbsp; Cookies</span>
+  </div>
+</footer>
+
+<script>
+// ===== PRODUCT DATA =====
+const products = [
+  // SLEEP
+  {id:1,cat:'sleep',brand:'Sunday Littles',name:'CloudLuxe™ Bamboo Slumber PJ Set',price:'$58.00 CAD',badge:'Bestseller',emoji:'🌙',bg:'#2D4A3E',url:'https://sundaylittles.com/collections/baby'},
+  {id:2,cat:'sleep',brand:'Sunday Littles',name:'Sunday Sleep Bag — 1.0 TOG',price:'$64.00 CAD',badge:'New',emoji:'😴',bg:'#3A5C4E',url:'https://sundaylittles.com/collections/baby'},
+  {id:3,cat:'sleep',brand:'Sunday Littles',name:'Little Zipper Footie Pajamas',price:'$52.00 CAD',badge:null,emoji:'⭐',bg:'#2D4A3E',url:'https://sundaylittles.com/collections/baby'},
+  {id:4,cat:'sleep',brand:'Sunday Littles',name:'Family Matching Bamboo PJ Set',price:'$72.00 CAD',badge:'New',emoji:'👨‍👩‍👧',bg:'#1C3028',url:'https://sundaylittles.com/collections/family-matching-pajamas'},
+  {id:5,cat:'sleep',brand:'Sunday Littles',name:'Bamboo Muslin Swaddle Blanket',price:'$38.00 CAD',badge:null,emoji:'🌿',bg:'#2D4A3E',url:'https://sundaylittles.com/collections/baby'},
+  // NURSERY
+  {id:6,cat:'nursery',brand:'High Cotton Textile',name:'White & Baby Pink Ruffled Crib Skirt with Large Bows',price:'$68.00',badge:'Editor's Pick',emoji:'🏡',bg:'#C4956A',url:'https://highcottontextile.com/collections/girl-crib-bedding-sets/products/white-and-baby-pink-ruffled-crib-skirt-large-bows'},
+  {id:7,cat:'nursery',brand:'High Cotton Textile',name:'Nursery Curtain Panel Collection',price:'$82.00',badge:null,emoji:'🪟',bg:'#B8925A',url:'https://highcottontextile.com/collections/curtains'},
+  {id:8,cat:'nursery',brand:'High Cotton Textile',name:'Girl Crib Bedding Set — Ruffled',price:'$145.00',badge:'Bestseller',emoji:'🎀',bg:'#C4956A',url:'https://highcottontextile.com/collections/girl-crib-bedding-sets'},
+  {id:9,cat:'nursery',brand:'High Cotton Textile',name:'Mesh Crib Liner — White',price:'$29.00',badge:null,emoji:'🛏️',bg:'#A8855C',url:'https://highcottontextile.com/'},
+  {id:10,cat:'nursery',brand:'High Cotton Textile',name:'Large Crib Bow — Blush Pink',price:'$24.00',badge:'New',emoji:'🎗️',bg:'#C4956A',url:'https://highcottontextile.com/'},
+  // CLOTHING
+  {id:11,cat:'clothing',brand:'Posh Tots',name:'Paty Knit Bubble with Trim Options',price:'$40.00',badge:'New',emoji:'👗',bg:'#F0D5CA',emojiColor:'var(--navy)',url:'https://shopposhtots.com/products/paty-bubble-w-trim-options'},
+  {id:12,cat:'clothing',brand:'Posh Tots',name:'Paty Bonnet with Ribbon Tie',price:'$26.00',badge:null,emoji:'👒',bg:'#EBC5B5',emojiColor:'var(--navy)',url:'https://shopposhtots.com/products/paty-bonnet-with-ribbon-tie'},
+  {id:13,cat:'clothing',brand:'Posh Tots',name:'Pixie Lily Jersey Cap',price:'$20.00',badge:null,emoji:'🧢',bg:'#E8D5C8',emojiColor:'var(--navy)',url:'https://shopposhtots.com/products/pixie-lily-jersey-cap'},
+  {id:14,cat:'clothing',brand:'Obi Outfitters',name:'World Soccer High Contrast Bamboo 2-Piece Set',price:'$48.00',badge:'Bestseller',emoji:'⚽',bg:'#1C2B3A',url:'https://obioutfitters.com/products/world-soccer-high-contrast-bamboo-2-piece-set'},
+  {id:15,cat:'clothing',brand:'Obi Outfitters',name:'Obi Waffle Knit Athletic Set — Marshmallow White',price:'$52.00',badge:null,emoji:'🥛',bg:'#2C3D50',url:'https://obioutfitters.com/products/obi-waffle-knit-athletic-set-marshmallow-white'},
+  {id:16,cat:'clothing',brand:'Posh Tots',name:'Paty Swiss Floral Bubble',price:'$46.00',badge:'New',emoji:'🌸',bg:'#F0D5CA',emojiColor:'var(--navy)',url:'https://shopposhtots.com/products/paty-swiss-floral-bubble'},
+  {id:17,cat:'clothing',brand:'Hounds & Honeys',name:'Stars & Stripes Baby Girl Bubble Romper',price:'$42.00',badge:null,emoji:'🌟',bg:'#D4E0F0',emojiColor:'var(--navy)',url:'https://houndsandhoneys.com/products/stars-stripes-baby-girl-bubble-romper-12m'},
+  {id:18,cat:'clothing',brand:'Obi Outfitters',name:'Heirloom Alphabet Quilt — Educational Blanket',price:'$88.00',badge:'Loved',emoji:'🔤',bg:'#1C2B3A',url:'https://obioutfitters.com/products/heirloom-alphabet-quilt'},
+  {id:19,cat:'clothing',brand:'Posh Tots',name:'Jersey Daygown — Classic White',price:'$30.00',badge:null,emoji:'🩷',bg:'#F0D5CA',emojiColor:'var(--navy)',url:'https://shopposhtots.com/products/jersey-daygown'},
+  {id:20,cat:'clothing',brand:'Obi Outfitters',name:'Sweet Knit Baby Beanie — Sweet Pink',price:'$18.00',badge:null,emoji:'🎩',bg:'#2C3D50',url:'https://obioutfitters.com/products/sweet-knit-baby-beanie-sweet-pink'},
+  // GIFTS
+  {id:21,cat:'gifts',brand:'The Custom Co',name:'Personalised Baby Blanket with Name',price:'$49.00 AUD',badge:'#1 Gift',emoji:'🎁',bg:'#7A9E8E',url:'https://www.thecustomco.com.au/'},
+  {id:22,cat:'gifts',brand:'The Custom Co',name:'Personalised Nappy Bag — Premium',price:'$79.00 AUD',badge:'New',emoji:'👜',bg:'#6B9080',url:'https://www.thecustomco.com.au/'},
+  {id:23,cat:'gifts',brand:'The Custom Co',name:'Toddler Personalised Backpack',price:'$45.00 AUD',badge:null,emoji:'🎒',bg:'#7A9E8E',url:'https://www.thecustomco.com.au/'},
+  {id:24,cat:'gifts',brand:'The Custom Co',name:'Personalised Kids Pyjamas',price:'$55.00 AUD',badge:'Bestseller',emoji:'⭐',bg:'#6B9080',url:'https://www.thecustomco.com.au/'},
+  {id:25,cat:'gifts',brand:'The Custom Co',name:'Kids Sand Free Beach Towel',price:'$38.00 AUD',badge:null,emoji:'🏖️',bg:'#7A9E8E',url:'https://www.thecustomco.com.au/'},
+  {id:26,cat:'gifts',brand:'The Custom Co',name:'Personalised Santa Sack',price:'$34.00 AUD',badge:'Seasonal',emoji:'🎅',bg:'#6B9080',url:'https://www.thecustomco.com.au/'},
+  // HOME THROWS
+  {id:27,cat:'home',brand:'Battilo Home',name:'Battilo Chenille Throw Blanket',price:'$54.00',badge:'Editor's Pick',emoji:'🧶',bg:'#8B5A30',url:'https://www.battiloshop.com/products/battilo-chenille-throw'},
+  {id:28,cat:'home',brand:'Battilo Home',name:'Chenille Cable Throw Blanket',price:'$58.00',badge:null,emoji:'🪡',bg:'#7A4F28',url:'https://www.battiloshop.com/products/chenille-cable-throw'},
+  {id:29,cat:'home',brand:'Battilo Home',name:'Wavy Pattern Fringe Throw',price:'$62.00',badge:'Bestseller',emoji:'〰️',bg:'#8B5A30',url:'https://www.battiloshop.com/products/wavy-pattern-fringe-throw'},
+  {id:30,cat:'home',brand:'Battilo Home',name:'Plush Faux Fur Throw Blanket',price:'$68.00',badge:'New',emoji:'🐑',bg:'#7A4F28',url:'https://www.battiloshop.com/collections/fur-blanket'},
+];
+
+function makeCard(p){
+  const b = p.badge ? `<div class="pbadge"><span${p.badge==='Sale'?' class="sale"':p.badge==='New'?' class="new"':''}>${p.badge}</span></div>` : '';
+  const ec = p.emojiColor ? `color:${p.emojiColor}` : 'color:rgba(255,255,255,.25)';
+  return `<div class="pcard">
+    <div class="pimg" style="background:${p.bg}">
+      <div class="pfall" style="${ec}">${p.emoji}</div>
+      ${b}
+      <button class="pwish">♡</button>
+      <button class="padd-btn" onclick="window.open('${p.url}','_blank')">Add to Cart</button>
+    </div>
+    <div class="pbody">
+      <div class="pbrand">${p.brand}</div>
+      <div class="pname">${p.name}</div>
+      <div class="prow">
+        <div class="pprice">${p.price}</div>
+        <a class="plink" href="${p.url}" target="_blank">View ↗</a>
+      </div>
+    </div>
+  </div>`;
+}
+
+// Populate all grids
+const gridAll = document.getElementById('grid-all');
+gridAll.innerHTML = products.map(makeCard).join('');
+
+['sleep','nursery','clothing','gifts','home'].forEach(cat=>{
+  const g = document.getElementById('grid-'+cat);
+  g.innerHTML = products.filter(p=>p.cat===cat).map(makeCard).join('');
+});
+
+// Bestsellers
+const bsData = [products[0],products[5],products[26],products[13],products[20],products[1]];
+document.getElementById('bs-grid').innerHTML = bsData.map((p,i)=>`
+  <div class="bs-card">
+    <div class="bs-num">0${i+1}</div>
+    <div class="bs-img" style="background:${p.bg}">
+      <div class="bfall" style="${p.emojiColor?'color:'+p.emojiColor:'color:rgba(255,255,255,.2)'}">${p.emoji}</div>
+    </div>
+    <div class="bs-body">
+      <div class="bs-brand">${p.brand}</div>
+      <div class="bs-name">${p.name}</div>
+      <div class="bs-row">
+        <div class="bs-price">${p.price}</div>
+        <a class="bs-cta" href="${p.url}" target="_blank">Shop Now</a>
+      </div>
+    </div>
+  </div>`).join('');
+
+// Tab switching
+function sw(name,btn){
+  document.querySelectorAll('[id^="c-"]').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.ctab').forEach(b=>b.classList.remove('on'));
+  document.getElementById('c-'+name).classList.add('on');
+  btn.classList.add('on');
+}
+
+// Hero slider
+let cur=0;
+const track=document.getElementById('hslides');
+const dc=document.getElementById('hdots');
+const total=5;
+for(let i=0;i<total;i++){
+  const d=document.createElement('button');
+  d.className='hdot'+(i===0?' on':'');
+  d.onclick=()=>go(i);
+  dc.appendChild(d);
+}
+function go(n){
+  cur=(n+total)%total;
+  track.style.transform='translateX(-'+cur*100+'%)';
+  document.querySelectorAll('.hdot').forEach((d,i)=>{
+    d.classList.toggle('on',i===cur);
+  });
+}
+function hs(d){go(cur+d)}
+setInterval(()=>hs(1),5500);
+</script>
+</body>
+</html>
