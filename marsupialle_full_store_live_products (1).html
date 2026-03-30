@@ -1,0 +1,708 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#C9A96E;--gold-light:#F0DFB8;--blush:#F7EEE8;--navy:#1A2340;
+  --white:#FDFCFA;--charcoal:#2C2C2A;--muted:#7A7670;
+  --yolo:#F6D860;--blue:#4A7EC7;--gcol:#9B9B9B;--wait:#F4EDE4;--goodie:#B8D4B0;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--charcoal);overflow-x:hidden}
+.topbar{background:var(--navy);color:var(--gold-light);text-align:center;padding:9px 20px;font-size:11px;letter-spacing:2px;text-transform:uppercase}
+nav{display:flex;align-items:center;justify-content:space-between;padding:16px 36px;background:var(--white);border-bottom:1px solid #e8e3dc;position:sticky;top:0;z-index:100;gap:20px}
+.logo-wrap{display:flex;flex-direction:column;align-items:center}
+.logo-name{font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);letter-spacing:1px}
+.logo-sub{font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
+.nav-l,.nav-r{display:flex;gap:24px;align-items:center}
+.nav-l a,.nav-r a{text-decoration:none;color:var(--charcoal);font-size:12px;letter-spacing:1px;text-transform:uppercase;font-weight:500}
+.nav-l a:hover,.nav-r a:hover{color:var(--gold)}
+.cart-pill{background:var(--navy);color:white;padding:9px 20px;font-size:11px;letter-spacing:1px;text-transform:uppercase;border:none;cursor:pointer;border-radius:2px}
+
+/* HERO */
+.hero{position:relative;height:500px;overflow:hidden;display:flex;align-items:center}
+.hero-slides{display:flex;height:100%;width:500%;transition:transform .8s cubic-bezier(.77,0,.175,1)}
+.hslide{min-width:20%;height:100%;display:flex;align-items:center;position:relative}
+.hslide-bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.hslide-ov{position:absolute;inset:0}
+.hslide-txt{position:relative;z-index:2;padding:0 64px;max-width:540px}
+.htag{font-size:10px;letter-spacing:4px;text-transform:uppercase;margin-bottom:10px}
+.htitle{font-family:'Playfair Display',serif;font-size:50px;line-height:1.1;margin-bottom:14px}
+.hsub{font-size:14px;line-height:1.6;margin-bottom:26px;opacity:.85}
+.hbtn{display:inline-block;padding:13px 32px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;border:none;cursor:pointer;transition:all .2s}
+.hero-dots{position:absolute;bottom:22px;left:64px;display:flex;gap:8px;z-index:10}
+.hdot{width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;transition:all .3s}
+.hero-arrows{position:absolute;right:36px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:10}
+.harr{width:38px;height:38px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:white;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.harr:hover{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+
+/* MARQUEE */
+.mbar{background:var(--gold);padding:11px 0;overflow:hidden;white-space:nowrap}
+.minner{display:inline-flex;animation:mq 28s linear infinite}
+.minner span{padding:0 36px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--navy);font-weight:500}
+@keyframes mq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* TRUST BAR */
+.trust{background:var(--navy);display:grid;grid-template-columns:repeat(4,1fr);padding:44px 40px}
+.titem{text-align:center;color:white}
+.tico{font-size:28px;margin-bottom:8px}
+.ttitle{font-family:'Playfair Display',serif;font-size:15px;color:var(--gold-light);margin-bottom:4px}
+.tdesc{font-size:12px;color:rgba(255,255,255,.55);line-height:1.4}
+
+/* SECTION */
+section{padding:64px 40px}
+.sh{text-align:center;margin-bottom:44px}
+.slabel{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.stitle{font-family:'Playfair Display',serif;font-size:36px;color:var(--navy);margin-bottom:10px}
+.ssub{color:var(--muted);font-size:14px;max-width:460px;margin:0 auto}
+
+/* TABS */
+.tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:38px}
+.tab{padding:9px 22px;border:1.5px solid #ddd;background:none;cursor:pointer;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;transition:all .2s;border-radius:2px;font-family:'DM Sans',sans-serif}
+.tab.on{border-color:var(--navy);background:var(--navy);color:white}
+.tab:hover:not(.on){border-color:var(--gold);color:var(--gold)}
+
+/* PRODUCT GRID */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:24px;max-width:1280px;margin:0 auto}
+.pcard{background:var(--white);border:1px solid #ece8e2;transition:all .3s;cursor:pointer;position:relative}
+.pcard:hover{box-shadow:0 10px 36px rgba(26,35,64,.13);transform:translateY(-3px)}
+.pimg{height:250px;overflow:hidden;position:relative;background:#f5f1ec;display:flex;align-items:center;justify-content:center}
+.pimg img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.pcard:hover .pimg img{transform:scale(1.07)}
+.pbadge{position:absolute;top:10px;left:10px;background:var(--navy);color:var(--gold-light);font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;z-index:2}
+.psrc{position:absolute;bottom:8px;right:8px;background:rgba(255,255,255,.85);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;color:var(--muted);z-index:2}
+.plink{position:absolute;top:8px;right:8px;width:28px;height:28px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;z-index:2;cursor:pointer;text-decoration:none;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.pbody{padding:16px}
+.pcat{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.pname{font-family:'Playfair Display',serif;font-size:15px;color:var(--navy);margin-bottom:10px;line-height:1.35}
+.pprice{color:var(--charcoal);font-size:14px;font-weight:500;margin-bottom:12px}
+.padd{width:100%;padding:11px;background:var(--navy);color:white;border:none;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:500;font-family:'DM Sans',sans-serif;transition:background .2s}
+.padd:hover{background:var(--gold);color:var(--navy)}
+.panel{display:none}.panel.on{display:block}
+
+/* SPLIT */
+.split{display:grid;grid-template-columns:1fr 1fr;min-height:380px}
+.sp{padding:56px;display:flex;flex-direction:column;justify-content:center}
+.sp.dk{background:var(--navy);color:white}
+.sp.lt{background:var(--blush);color:var(--navy)}
+.sp h2{font-family:'Playfair Display',serif;font-size:36px;line-height:1.2;margin-bottom:14px}
+.sp p{font-size:14px;line-height:1.7;margin-bottom:24px;opacity:.8}
+.spbtn{display:inline-block;padding:12px 28px;border:1.5px solid currentColor;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:500;cursor:pointer;background:none;color:inherit;transition:all .2s;font-family:'DM Sans',sans-serif}
+.spbtn:hover{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+
+/* REVIEWS */
+.rvgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto}
+.rcard{background:white;padding:28px;border:1px solid #ece8e2}
+.rstars{color:var(--gold);font-size:15px;margin-bottom:10px}
+.rtext{font-family:'Playfair Display',serif;font-style:italic;font-size:14px;line-height:1.7;color:var(--charcoal);margin-bottom:14px}
+.rauth{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+
+/* FOOTER */
+footer{background:#0F1629;color:rgba(255,255,255,.65);padding:56px 40px 28px}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:44px}
+.fcol h4{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light);margin-bottom:18px}
+.fcol ul{list-style:none}
+.fcol li{margin-bottom:9px;font-size:12px;cursor:pointer}
+.fcol li:hover{color:white}
+.fbot{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;display:flex;justify-content:space-between;font-size:11px}
+.nemail{display:flex;gap:8px;margin-top:10px}
+.nemail input{flex:1;padding:9px 12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:white;font-size:12px;font-family:'DM Sans',sans-serif}
+.nemail input::placeholder{color:rgba(255,255,255,.3)}
+.nemail button{background:var(--gold);border:none;color:var(--navy);padding:9px 16px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif}
+</style>
+
+<div class="topbar">✦ Free UK Delivery Over £50 &nbsp;|&nbsp; Luxury Baby &amp; Home &nbsp;|&nbsp; Handcrafted with Love ✦</div>
+
+<nav>
+  <div class="nav-l">
+    <a href="#">Collections</a>
+    <a href="#">Nursery</a>
+    <a href="#">Clothing</a>
+  </div>
+  <div class="logo-wrap">
+    <div class="logo-name">Marsupialle</div>
+    <div class="logo-sub">Luxury Baby &amp; Home</div>
+  </div>
+  <div class="nav-r">
+    <a href="#">About</a>
+    <a href="#">FAQ</a>
+    <button class="cart-pill">🛒 Cart (0)</button>
+  </div>
+</nav>
+
+<!-- HERO 5 BANNERS -->
+<div class="hero" id="hero">
+  <div class="hero-slides" id="hslides">
+
+    <div class="hslide">
+      <div class="hslide-bg" style="background:linear-gradient(135deg,#F7EEE8,#E4CDB8)"></div>
+      <div class="hslide-ov" style="background:linear-gradient(to right,rgba(26,35,64,.55),rgba(26,35,64,.05))"></div>
+      <div class="hslide-txt" style="color:white">
+        <div class="htag" style="color:var(--gold-light)">Signature Collection</div>
+        <div class="htitle">Wrap Them in<br><em>Pure Luxury</em></div>
+        <div class="hsub">Handcrafted Velveteen stroller blankets — soft, elegant, made for precious little ones.</div>
+        <button class="hbtn" style="background:var(--gold);color:var(--navy)">Shop Blankets</button>
+      </div>
+    </div>
+
+    <div class="hslide">
+      <div class="hslide-bg" style="background:linear-gradient(135deg,#1A2340,#2C3A6B)"></div>
+      <div class="hslide-txt" style="color:white">
+        <div class="htag" style="color:var(--gold-light)">Nursery Essentials</div>
+        <div class="htitle">The Nursery<br><em>of Your Dreams</em></div>
+        <div class="hsub">Ruffled crib skirts, bedding sets, large crib bows &amp; elegant curtains for the perfect nursery.</div>
+        <button class="hbtn" style="background:var(--gold);color:var(--navy)">Shop Nursery</button>
+      </div>
+    </div>
+
+    <div class="hslide">
+      <div class="hslide-bg" style="background:linear-gradient(135deg,#B8D4B0,#D4E8D0)"></div>
+      <div class="hslide-txt" style="color:var(--navy)">
+        <div class="htag" style="color:#3a6e30">Baby Clothing</div>
+        <div class="htitle" style="color:var(--navy)">Dressed for<br><em>Every Moment</em></div>
+        <div class="hsub" style="color:#3a5a36;opacity:1">From heirloom gowns to playful rompers — for baby girls &amp; boys of all sizes.</div>
+        <button class="hbtn" style="background:var(--navy);color:white">Shop Clothing</button>
+      </div>
+    </div>
+
+    <div class="hslide">
+      <div class="hslide-bg" style="background:linear-gradient(135deg,#F6D860,#FBE99A)"></div>
+      <div class="hslide-txt" style="color:var(--navy)">
+        <div class="htag" style="color:#8B6914">Cozy Home</div>
+        <div class="htitle" style="color:var(--navy)">Throws That Feel<br><em>Like a Hug</em></div>
+        <div class="hsub" style="color:#5a4a1a;opacity:1">Chenille, cable-knit &amp; wavy-fringe throw blankets from Battilo Home.</div>
+        <button class="hbtn" style="background:var(--navy);color:white">Shop Throws</button>
+      </div>
+    </div>
+
+    <div class="hslide">
+      <div class="hslide-bg" style="background:linear-gradient(135deg,#4A7EC7,#2C5AA0)"></div>
+      <div class="hslide-txt" style="color:white">
+        <div class="htag" style="color:var(--gold-light)">Gifts &amp; Keepsakes</div>
+        <div class="htitle">Dolls &amp; Personalized<br><em>Treasures</em></div>
+        <div class="hsub">Personalized Leya Dolls, doll backpacks, playsets &amp; keepsakes — made just for them.</div>
+        <button class="hbtn" style="background:var(--gold);color:var(--navy)">Shop Gifts</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="hero-dots" id="hdots"></div>
+  <div class="hero-arrows">
+    <button class="harr" onclick="hs(-1)">▲</button>
+    <button class="harr" onclick="hs(1)">▼</button>
+  </div>
+</div>
+
+<div class="mbar"><div class="minner">
+  <span>Free UK Delivery Over £50</span><span>✦</span><span>Luxury Baby Blankets</span><span>✦</span><span>Nursery Essentials</span><span>✦</span><span>Heirloom Quality</span><span>✦</span><span>Personalized Gifts</span><span>✦</span><span>Baby Clothing</span><span>✦</span>
+  <span>Free UK Delivery Over £50</span><span>✦</span><span>Luxury Baby Blankets</span><span>✦</span><span>Nursery Essentials</span><span>✦</span><span>Heirloom Quality</span><span>✦</span><span>Personalized Gifts</span><span>✦</span><span>Baby Clothing</span><span>✦</span>
+</div></div>
+
+<div class="trust">
+  <div class="titem"><div class="tico">🚚</div><div class="ttitle">Free UK Delivery</div><div class="tdesc">On all orders over £50</div></div>
+  <div class="titem"><div class="tico">🎀</div><div class="ttitle">Gift Wrapping</div><div class="tdesc">Complimentary on every order</div></div>
+  <div class="titem"><div class="tico">⭐</div><div class="ttitle">Heirloom Quality</div><div class="tdesc">Made to last generations</div></div>
+  <div class="titem"><div class="tico">💬</div><div class="ttitle">5-Star Loved</div><div class="tdesc">Thousands of happy parents</div></div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="shop">
+  <div class="sh">
+    <div class="slabel">Our Collections</div>
+    <div class="stitle">Shop by Colour &amp; Style</div>
+    <div class="ssub">Five curated colour collections — each filled with real products from premium brands</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab on" onclick="sw('yolo',this)">🟡 Yolo — Yellow</button>
+    <button class="tab" onclick="sw('blue',this)">🔵 Blue</button>
+    <button class="tab" onclick="sw('grey',this)">⚫ Grey</button>
+    <button class="tab" onclick="sw('wait',this)">🟤 Wait — Warm</button>
+    <button class="tab" onclick="sw('goodie',this)">🟢 Goodie — Green</button>
+  </div>
+
+  <!-- YOLO -->
+  <div id="p-yolo" class="panel on">
+    <div class="pgrid">
+      <div class="pcard">
+        <div class="pimg" style="background:#FFF8D6">
+          <img src="https://marsupialle.com/cdn/shop/files/Baige_Cover.jpg?v=1773667171&width=533" alt="Creamy Slumber Blanket" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🛏️</div>'">
+          <div class="pbadge">Bestseller</div>
+          <a class="plink" href="https://marsupialle.com/products/creamy-slumber-cream-luxury-velveteen-stroller-blanket-soft-baby-cover-with-harness-slots-marsupialle" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Blankets · Marsupialle</div><div class="pname">Creamy Slumber Luxury Velveteen Stroller Blanket</div><div class="pprice">£100.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#FFFBE8">
+          <img src="https://houndsandhoneys.com/cdn/shop/files/370bcf484849694cf96a5df9037eaa191f45d69444598c6f671af25deea2c13f.jpg?v=1774490970&width=600" alt="Stars Stripes Romper" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>👗</div>'">
+          <div class="pbadge">New</div>
+          <a class="plink" href="https://houndsandhoneys.com/products/stars-stripes-baby-girl-bubble-romper-12m" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Clothing · Hounds &amp; Honeys</div><div class="pname">Stars &amp; Stripes Baby Girl Bubble Romper</div><div class="pprice">$42.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#FFF8D6">
+          <img src="https://www.battiloshop.com/cdn/shop/files/DSC06687.jpg?v=1764229514&width=533" alt="Battilo Chenille Throw" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🧶</div>'">
+          <a class="plink" href="https://www.battiloshop.com/products/battilo-chenille-throw" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Home Throws · Battilo</div><div class="pname">Battilo Chenille Throw Blanket</div><div class="pprice">$54.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#FFFBE8">
+          <img src="https://leyadoll.com/cdn/shop/files/buddy-ben-doll-backpack.jpg?width=533" alt="Buddy Ben Doll Backpack" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🎒</div>'">
+          <div class="pbadge">Gift Pick</div>
+          <a class="plink" href="https://leyadoll.com/products/personalized-buddy-ben-doll-backpack" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Gifts · Leya Doll</div><div class="pname">Personalized Buddy Ben Doll Backpack</div><div class="pprice">$45.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#FFF8D6">
+          <img src="https://obioutfitters.com/cdn/shop/products/sweet-knit-baby-beanie.jpg?width=533" alt="Sweet Knit Baby Beanie" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🎩</div>'">
+          <a class="plink" href="https://obioutfitters.com/products/sweet-knit-baby-beanie-sweet-pink" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Accessories · Obi Outfitters</div><div class="pname">Sweet Knit Baby Beanie — Sweet Pink</div><div class="pprice">$18.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#FFFBE8">
+          <img src="https://leyadoll.com/cdn/shop/files/a-little-teapot-playset.jpg?width=533" alt="Teapot Playset" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🫖</div>'">
+          <a class="plink" href="https://leyadoll.com/products/a-little-teapot-playset" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Toys · Leya Doll</div><div class="pname">A Little Teapot Playset</div><div class="pprice">$36.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#FFF8D6">
+          <img src="https://obioutfitters.com/cdn/shop/products/obi-waffle-knit-athletic-set.jpg?width=533" alt="Obi Waffle Knit Set" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>👕</div>'">
+          <a class="plink" href="https://obioutfitters.com/products/obi-waffle-knit-athletic-set-marshmallow-white" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Clothing · Obi Outfitters</div><div class="pname">Obi Waffle Knit Athletic Set — Marshmallow White</div><div class="pprice">$52.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#FFFBE8">
+          <img src="https://www.battiloshop.com/cdn/shop/files/wavy-pattern-fringe-throw.jpg?width=533" alt="Wavy Fringe Throw" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🪡</div>'">
+          <a class="plink" href="https://www.battiloshop.com/products/wavy-pattern-fringe-throw" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Home Throws · Battilo</div><div class="pname">Wavy Pattern Fringe Throw</div><div class="pprice">$62.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#FFF8D6">
+          <img src="https://shopposhtots.com/cdn/shop/products/pixie-lily-jersey-bib.jpg?width=533" alt="Pixie Lily Bib" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🥛</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/pixie-lily-jersey-bib" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Accessories · Posh Tots</div><div class="pname">Pixie Lily Jersey Bib</div><div class="pprice">$16.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#FFFBE8">
+          <img src="https://shopposhtots.com/cdn/shop/products/paty-swaddle-blanket.jpg?width=533" alt="Paty Swaddle Blanket" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🧸</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/paty-swaddle-blanket-w-colored-trim" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Accessories · Posh Tots</div><div class="pname">Paty Swaddle Blanket with Coloured Trim</div><div class="pprice">$32.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLUE -->
+  <div id="p-blue" class="panel">
+    <div class="pgrid">
+      <div class="pcard">
+        <div class="pimg" style="background:#EDF4FF">
+          <img src="https://marsupialle.com/cdn/shop/files/KT3002_697533879155_4.jpg?v=1768901286&width=533" alt="Regal Dream Blanket" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🛏️</div>'">
+          <div class="pbadge">Bestseller</div>
+          <a class="plink" href="https://marsupialle.com/products/regal-dream-blue-luxury-velveteen-stroller-blanket-soft-baby-cover-with-harness-slots-marsupialle" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Blankets · Marsupialle</div><div class="pname">Regal Dream Blue Luxury Velveteen Stroller Blanket</div><div class="pprice">£100.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#EDF4FF">
+          <img src="https://obioutfitters.com/cdn/shop/products/world-soccer-2-piece-set.jpg?width=533" alt="World Soccer Set" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>⚽</div>'">
+          <div class="pbadge">New</div>
+          <a class="plink" href="https://obioutfitters.com/products/world-soccer-high-contrast-bamboo-2-piece-set" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Clothing · Obi Outfitters</div><div class="pname">World Soccer High Contrast Bamboo 2-Piece Set</div><div class="pprice">$48.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#EDF4FF">
+          <img src="https://www.battiloshop.com/cdn/shop/files/chenille-cable-throw-blue.jpg?width=533" alt="Cable Throw" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🧶</div>'">
+          <a class="plink" href="https://www.battiloshop.com/products/chenille-cable-throw" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Home Throws · Battilo</div><div class="pname">Chenille Cable Throw Blanket</div><div class="pprice">$58.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#EDF4FF">
+          <img src="https://shopposhtots.com/cdn/shop/products/pixie-lily-jersey-cap.jpg?width=533" alt="Pixie Lily Cap" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🧢</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/pixie-lily-jersey-cap" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Accessories · Posh Tots</div><div class="pname">Pixie Lily Jersey Cap</div><div class="pprice">$20.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#EDF4FF">
+          <img src="https://leyadoll.com/cdn/shop/files/personalized-doll-backpack.jpg?width=533" alt="Doll Backpack" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🎒</div>'">
+          <a class="plink" href="https://leyadoll.com/collections/personalized-doll-backpacks" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Gifts · Leya Doll</div><div class="pname">Personalized Doll Backpack Collection</div><div class="pprice">$45.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#EDF4FF">
+          <img src="https://shopposhtots.com/cdn/shop/products/paty-creeper-ribbon-ties.jpg?width=533" alt="Paty Creeper" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>👕</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/paty-creeper-with-ribbon-ties" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Clothing · Posh Tots</div><div class="pname">Paty Creeper with Ribbon Ties</div><div class="pprice">$34.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#EDF4FF">
+          <img src="https://shopposhtots.com/cdn/shop/products/pixie-lily-jersey-receiving-blanket.jpg?width=533" alt="Pixie Lily Blanket" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🥻</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/pixie-lily-jersey-receiving-blanket" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Accessories · Posh Tots</div><div class="pname">Pixie Lily Jersey Receiving Blanket</div><div class="pprice">$28.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#EDF4FF">
+          <img src="https://obioutfitters.com/cdn/shop/products/obi-cutie-bow-headwrap.jpg?width=533" alt="Obi Bow Headwrap" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🎗️</div>'">
+          <a class="plink" href="https://obioutfitters.com/products/obi-cutie-bow-headwrap-pink-obi-love" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Accessories · Obi Outfitters</div><div class="pname">Obi Cutie Bow Headwrap — Pink Obi Love</div><div class="pprice">$16.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#EDF4FF">
+          <img src="https://shopposhtots.com/cdn/shop/products/paty-mittens.jpg?width=533" alt="Paty Mittens" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🧤</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/paty-mittens" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Accessories · Posh Tots</div><div class="pname">Paty Mittens</div><div class="pprice">$18.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#EDF4FF">
+          <img src="https://highcottontextile.com/cdn/shop/products/curtains-blue.jpg?width=533" alt="HCT Curtains" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🏠</div>'">
+          <a class="plink" href="https://highcottontextile.com/collections/curtains" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Nursery · High Cotton Textile</div><div class="pname">Nursery Curtain Panel Collection</div><div class="pprice">$82.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GREY -->
+  <div id="p-grey" class="panel">
+    <div class="pgrid">
+      <div class="pcard">
+        <div class="pimg" style="background:#F3F2F0">
+          <img src="https://www.battiloshop.com/cdn/shop/files/wavy-fringe-throw-grey.jpg?width=533" alt="Wavy Fringe Throw" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🧶</div>'">
+          <div class="pbadge">Editor's Pick</div>
+          <a class="plink" href="https://www.battiloshop.com/products/wavy-pattern-fringe-throw" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Home Throws · Battilo</div><div class="pname">Wavy Pattern Fringe Throw — Grey</div><div class="pprice">$62.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#F3F2F0">
+          <img src="https://www.battiloshop.com/cdn/shop/files/chenille-cable-throw-grey.jpg?width=533" alt="Cable Throw Grey" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🪡</div>'">
+          <a class="plink" href="https://www.battiloshop.com/products/chenille-cable-throw" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Home Throws · Battilo</div><div class="pname">Chenille Cable Throw — Dove Grey</div><div class="pprice">$58.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#F3F2F0">
+          <img src="https://obioutfitters.com/cdn/shop/products/heirloom-alphabet-quilt.jpg?width=533" alt="Alphabet Quilt" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🔤</div>'">
+          <a class="plink" href="https://obioutfitters.com/products/heirloom-alphabet-quilt" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Bedding · Obi Outfitters</div><div class="pname">Heirloom Alphabet Quilt — Soft Educational Blanket</div><div class="pprice">$88.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#F3F2F0">
+          <img src="https://shopposhtots.com/cdn/shop/products/paty-bear-beanie.jpg?width=533" alt="Bear Beanie" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🐻</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/paty-bear-beanie-w-trim-options" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Accessories · Posh Tots</div><div class="pname">Paty Bear Beanie with Trim Options</div><div class="pprice">$24.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#F3F2F0">
+          <img src="https://shopposhtots.com/cdn/shop/products/paty-slippers.jpg?width=533" alt="Paty Slippers" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🥿</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/paty-slippers" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Accessories · Posh Tots</div><div class="pname">Paty Slippers</div><div class="pprice">$22.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#F3F2F0">
+          <img src="https://shopposhtots.com/cdn/shop/products/paty-bonnet-ribbon-tie.jpg?width=533" alt="Paty Bonnet" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>👒</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/paty-bonnet-with-ribbon-tie" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Accessories · Posh Tots</div><div class="pname">Paty Bonnet with Ribbon Tie</div><div class="pprice">$26.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#F3F2F0">
+          <img src="https://obioutfitters.com/cdn/shop/products/obi-waffle-knit-grey.jpg?width=533" alt="Waffle Knit Set" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>👕</div>'">
+          <a class="plink" href="https://obioutfitters.com/products/obi-waffle-knit-athletic-set-marshmallow-white" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Clothing · Obi Outfitters</div><div class="pname">Obi Waffle Knit Athletic Set — Marshmallow</div><div class="pprice">$52.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#F3F2F0">
+          <img src="https://shopposhtots.com/cdn/shop/products/paty-bubble-eyelet-trim.jpg?width=533" alt="Paty Bubble" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🫧</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/paty-bubble-w-eyelet-trim" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Clothing · Posh Tots</div><div class="pname">Paty Bubble with Eyelet Trim</div><div class="pprice">$40.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#F3F2F0">
+          <img src="https://shopposhtots.com/cdn/shop/products/knit-cap-bow.jpg?width=533" alt="Knit Cap Bow" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🎀</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/knit-cap-with-bow" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Accessories · Posh Tots</div><div class="pname">Knit Cap with Bow</div><div class="pprice">$22.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#F3F2F0">
+          <img src="https://leyadoll.com/cdn/shop/files/leyadoll-backpack-grey.jpg?width=533" alt="Doll Backpack Grey" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🎒</div>'">
+          <a class="plink" href="https://leyadoll.com/collections/personalized-doll-backpacks" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Gifts · Leya Doll</div><div class="pname">Personalized Doll Backpack — Grey Collection</div><div class="pprice">$45.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WAIT -->
+  <div id="p-wait" class="panel">
+    <div class="pgrid">
+      <div class="pcard">
+        <div class="pimg" style="background:#FAF5EF">
+          <img src="https://marsupialle.com/cdn/shop/files/Baige_Cover.jpg?v=1773667171&width=533" alt="Creamy Slumber" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🛏️</div>'">
+          <div class="pbadge">Classic</div>
+          <a class="plink" href="https://marsupialle.com/products/creamy-slumber-cream-luxury-velveteen-stroller-blanket-soft-baby-cover-with-harness-slots-marsupialle" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Blankets · Marsupialle</div><div class="pname">Creamy Slumber Cream Velveteen Stroller Blanket</div><div class="pprice">£100.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#FAF5EF">
+          <img src="https://highcottontextile.com/cdn/shop/products/white-pink-ruffled-crib-skirt.jpg?width=533" alt="Ruffled Crib Skirt" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🏡</div>'">
+          <a class="plink" href="https://highcottontextile.com/collections/girl-crib-bedding-sets/products/white-and-baby-pink-ruffled-crib-skirt-large-bows" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Nursery · High Cotton Textile</div><div class="pname">White &amp; Baby Pink Ruffled Crib Skirt with Large Bows</div><div class="pprice">$68.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#FAF5EF">
+          <img src="https://shopposhtots.com/cdn/shop/products/jersey-daygown.jpg?width=533" alt="Jersey Daygown" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>👗</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/jersey-daygown" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Clothing · Posh Tots</div><div class="pname">Jersey Daygown</div><div class="pprice">$30.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#FAF5EF">
+          <img src="https://shopposhtots.com/cdn/shop/products/paty-pacifier-clip.jpg?width=533" alt="Pacifier Clip" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🧷</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/paty-pacifier-clip" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Accessories · Posh Tots</div><div class="pname">Paty Pacifier Clip</div><div class="pprice">$14.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#FAF5EF">
+          <img src="https://leyadoll.com/cdn/shop/files/milly-girl-her-pet.jpg?width=533" alt="Milly Girl Doll" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🧸</div>'">
+          <div class="pbadge">Gift Pick</div>
+          <a class="plink" href="https://leyadoll.com/products/personalized-milly-girl-her-pet" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Gifts · Leya Doll</div><div class="pname">Personalized Milly Girl &amp; Her Pet</div><div class="pprice">$55.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#FAF5EF">
+          <img src="https://shopposhtots.com/cdn/shop/products/paty-swiss-floral-bubble.jpg?width=533" alt="Swiss Floral Bubble" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🌸</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/paty-swiss-floral-bubble" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Clothing · Posh Tots</div><div class="pname">Paty Swiss Floral Bubble</div><div class="pprice">$46.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#FAF5EF">
+          <img src="https://shopposhtots.com/cdn/shop/products/pink-jersey-crib-set.jpg?width=533" alt="Pink Crib Set" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🛏️</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/pink-jersey-crib-set" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Nursery · Posh Tots</div><div class="pname">Pink Jersey Crib Set</div><div class="pprice">$92.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#FAF5EF">
+          <img src="https://shopposhtots.com/cdn/shop/products/paty-overlap-shoulder-gown.jpg?width=533" alt="Overlap Shoulder Gown" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>👘</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/paty-knit-overlap-shoulder-gown" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Clothing · Posh Tots</div><div class="pname">Paty Knit Overlap Shoulder Gown</div><div class="pprice">$34.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#FAF5EF">
+          <img src="https://shopposhtots.com/cdn/shop/products/footie-eyelet-ruffle.jpg?width=533" alt="Footie Eyelet Ruffle" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🌷</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/footie-w-eyelet-ruffle" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Clothing · Posh Tots</div><div class="pname">Footie with Eyelet Ruffle</div><div class="pprice">$36.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#FAF5EF">
+          <img src="https://shopposhtots.com/cdn/shop/products/paty-bubble-trim.jpg?width=533" alt="Paty Bubble" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🫧</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/paty-bubble-w-trim-options" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Clothing · Posh Tots</div><div class="pname">Paty Bubble with Trim Options</div><div class="pprice">$40.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GOODIE -->
+  <div id="p-goodie" class="panel">
+    <div class="pgrid">
+      <div class="pcard">
+        <div class="pimg" style="background:#EEF6EC">
+          <img src="https://obioutfitters.com/cdn/shop/products/obi-puppy-love.jpg?width=533" alt="Obi Puppy Love" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🐾</div>'">
+          <div class="pbadge">Eco Pick</div>
+          <a class="plink" href="https://obioutfitters.com/collections/puppy" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Clothing · Obi Outfitters</div><div class="pname">Obi Puppy Love Collection</div><div class="pprice">$44.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#EEF6EC">
+          <img src="https://www.battiloshop.com/cdn/shop/files/battilo-chenille-throw-green.jpg?width=533" alt="Battilo Green Throw" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🌿</div>'">
+          <a class="plink" href="https://www.battiloshop.com/products/battilo-chenille-throw" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Home Throws · Battilo</div><div class="pname">Battilo Chenille Throw — Sage Green</div><div class="pprice">$54.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#EEF6EC">
+          <img src="https://leyadoll.com/cdn/shop/files/milly-girl-her-pet-green.jpg?width=533" alt="Milly Girl Doll" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🧸</div>'">
+          <a class="plink" href="https://leyadoll.com/products/personalized-milly-girl-her-pet" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Gifts · Leya Doll</div><div class="pname">Personalized Milly Girl &amp; Her Pet — Green</div><div class="pprice">$55.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#EEF6EC">
+          <img src="https://shopposhtots.com/cdn/shop/products/pixie-lily-jersey-receiving-blanket-green.jpg?width=533" alt="Pixie Lily Blanket Green" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🥬</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/pixie-lily-jersey-receiving-blanket" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Accessories · Posh Tots</div><div class="pname">Pixie Lily Jersey Receiving Blanket — Sage</div><div class="pprice">$28.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#EEF6EC">
+          <img src="https://highcottontextile.com/cdn/shop/products/curtains-green.jpg?width=533" alt="Green Curtains" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🏠</div>'">
+          <a class="plink" href="https://highcottontextile.com/collections/curtains" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Nursery · High Cotton Textile</div><div class="pname">Nursery Curtain Panel — Eucalyptus</div><div class="pprice">$82.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#EEF6EC">
+          <img src="https://obioutfitters.com/cdn/shop/products/obi-camo-outfit.jpg?width=533" alt="Obi Camo" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🌱</div>'">
+          <a class="plink" href="https://obioutfitters.com/collections/accessories" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Clothing · Obi Outfitters</div><div class="pname">Obi Camo 2-Piece Outfit — Olive</div><div class="pprice">$46.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#EEF6EC">
+          <img src="https://shopposhtots.com/cdn/shop/products/paty-bubble-trim-green.jpg?width=533" alt="Paty Bubble Green" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🌻</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/paty-bubble-w-trim-options" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Clothing · Posh Tots</div><div class="pname">Paty Bubble with Trim Options — Green</div><div class="pprice">$40.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#EEF6EC">
+          <img src="https://leyadoll.com/cdn/shop/files/leyadoll-backpack-green.jpg?width=533" alt="Doll Backpack Green" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🎒</div>'">
+          <a class="plink" href="https://leyadoll.com/collections/personalized-doll-backpacks" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Gifts · Leya Doll</div><div class="pname">Personalized Doll Backpack — Garden Green</div><div class="pprice">$45.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#EEF6EC">
+          <img src="https://obioutfitters.com/cdn/shop/products/heirloom-quilt-green.jpg?width=533" alt="Heirloom Quilt" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🍀</div>'">
+          <a class="plink" href="https://obioutfitters.com/products/heirloom-alphabet-quilt" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Bedding · Obi Outfitters</div><div class="pname">Heirloom Alphabet Quilt — Forest</div><div class="pprice">$88.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+      <div class="pcard">
+        <div class="pimg" style="background:#EEF6EC">
+          <img src="https://shopposhtots.com/cdn/shop/products/footie-eyelet-green.jpg?width=533" alt="Footie Green" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'font-size:64px;display:flex;align-items:center;justify-content:center;height:100%\'>🐸</div>'">
+          <a class="plink" href="https://shopposhtots.com/products/footie-w-eyelet-ruffle" target="_blank">↗</a>
+        </div>
+        <div class="pbody"><div class="pcat">Baby Clothing · Posh Tots</div><div class="pname">Footie with Eyelet Ruffle — Sage</div><div class="pprice">$36.00</div><button class="padd">Add to Cart</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT BANNER -->
+<div class="split">
+  <div class="sp dk">
+    <h2>Nursery &amp;<br>Home Collection</h2>
+    <p>Velveteen stroller blankets, ruffled crib skirts, curtains and chenille throws — luxury comfort for every room.</p>
+    <button class="spbtn">Explore Home</button>
+  </div>
+  <div class="sp lt">
+    <h2>Baby Clothing<br>&amp; <em>Keepsakes</em></h2>
+    <p>Heirloom gowns, bubbles, bonnets, personalized dolls and keepsakes they'll treasure for a lifetime.</p>
+    <button class="spbtn">Shop Clothing</button>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<section style="background:var(--blush)">
+  <div class="sh">
+    <div class="slabel">Community Love</div>
+    <div class="stitle">What Parents Are Saying</div>
+  </div>
+  <div class="rvgrid">
+    <div class="rcard"><div class="rstars">★★★★★</div><p class="rtext">"The Creamy Slumber blanket is extraordinary. My baby loves it and it looks so elegant in the pram."</p><div class="rauth">— Sarah M., London</div></div>
+    <div class="rcard"><div class="rstars">★★★★★</div><p class="rtext">"The ruffled crib skirt looks like something from a luxury boutique. Absolutely beautiful quality."</p><div class="rauth">— Emma R., Manchester</div></div>
+    <div class="rcard"><div class="rstars">★★★★★</div><p class="rtext">"The personalized doll backpack made my daughter cry happy tears. My go-to for all baby gifts now!"</p><div class="rauth">— Joanna K., Edinburgh</div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fgrid">
+    <div class="fcol">
+      <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--gold-light);margin-bottom:12px">Marsupialle</div>
+      <p style="font-size:13px;line-height:1.7;margin-bottom:18px">Luxury baby blankets, nursery essentials and keepsakes — handcrafted for the most precious moments in life.</p>
+      <p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light);margin-bottom:8px">Newsletter</p>
+      <div class="nemail"><input type="email" placeholder="your@email.com"><button>Join</button></div>
+    </div>
+    <div class="fcol">
+      <h4>Shop</h4>
+      <ul>
+        <li>Blankets</li><li>Nursery</li><li>Baby Clothing</li><li>Home Throws</li><li>Gifts &amp; Toys</li><li>Accessories</li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Shop by Size</h4>
+      <ul>
+        <li>0–3 Months</li><li>3–6 Months</li><li>6–12 Months</li><li>12–18 Months</li><li>18–24 Months</li><li>0–36 Months</li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Help</h4>
+      <ul>
+        <li>About Us</li><li>FAQ</li><li>Shipping</li><li>Returns</li><li>Contact</li><li>Community</li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>© 2025 Marsupialle. All rights reserved.</span>
+    <span>Privacy &nbsp;|&nbsp; Terms &nbsp;|&nbsp; Cookies</span>
+  </div>
+</footer>
+
+<script>
+let cur=0;
+const total=5;
+const track=document.getElementById('hslides');
+const dc=document.getElementById('hdots');
+for(let i=0;i<total;i++){
+  const d=document.createElement('button');
+  d.className='hdot';
+  d.style.background=i===0?'var(--gold)':'rgba(255,255,255,.4)';
+  d.onclick=()=>go(i);
+  dc.appendChild(d);
+}
+function go(n){
+  cur=(n+total)%total;
+  track.style.transform='translateX(-'+cur*20+'%)';
+  document.querySelectorAll('.hdot').forEach((d,i)=>{
+    d.style.background=i===cur?'var(--gold)':'rgba(255,255,255,.4)';
+    d.style.width=i===cur?'22px':'8px';
+    d.style.borderRadius=i===cur?'4px':'50%';
+  });
+}
+function hs(d){go(cur+d)}
+setInterval(()=>hs(1),5000);
+
+function sw(name,btn){
+  ['yolo','blue','grey','wait','goodie'].forEach(t=>{
+    const p=document.getElementById('p-'+t);
+    if(p)p.classList.remove('on');
+  });
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  const target=document.getElementById('p-'+name);
+  if(target)target.classList.add('on');
+  btn.classList.add('on');
+}
+</script>
